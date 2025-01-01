@@ -172,7 +172,7 @@ class LabeledBarGraphVector(urwid.WidgetPlaceholder):
 
     @staticmethod
     def check_label(label):
-        if len(label) >= 2 and not (None in label) or not label or label is None:
+        if len(label) >= 2 and None not in label or not label or label is None:
             return True
 
         return False
