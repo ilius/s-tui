@@ -18,10 +18,10 @@
 
 from __future__ import absolute_import
 
-from s_tui.sturwid.complex_bar_graph import LabeledBarGraphVector
-from s_tui.sturwid.complex_bar_graph import ScalableBarGraph
 import logging
 import math
+
+from s_tui.sturwid.complex_bar_graph import LabeledBarGraphVector, ScalableBarGraph
 
 logger = logging.getLogger(__name__)
 

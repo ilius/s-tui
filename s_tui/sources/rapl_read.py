@@ -19,15 +19,15 @@
 
 from __future__ import absolute_import
 
-import logging
 import glob
+import logging
 import os
 import re
 from collections import namedtuple
 from multiprocessing import cpu_count
 from sys import byteorder
-from s_tui.helper_functions import cat
 
+from s_tui.helper_functions import cat
 
 INTER_RAPL_DIR = "/sys/class/powercap/intel-rapl/"
 AMD_ENERGY_DIR_GLOB = "/sys/devices/platform/amd_energy.0/hwmon/hwmon*/"
@@ -86,7 +86,7 @@ class AMDEnergyReader:
                         glob.glob(AMD_ENERGY_DIR_GLOB + "energy*_label")
                     )
                 ),
-                sorted(glob.glob(AMD_ENERGY_DIR_GLOB + "energy*_input")),
+                sorted(glob.glob(AMD_ENERGY_DIR_GLOB + "energy*_input")), strict=False,
             )
         )
 
@@ -103,8 +103,7 @@ class AMDEnergyReader:
         num = int(AMDEnergyReader.match_label(label).group(2))
         if "socket" in label:
             return num
-        else:
-            return num + socket_number
+        return num + socket_number
 
     def read_power(self):
         ret = []

@@ -17,6 +17,7 @@
 from __future__ import absolute_import
 
 from setuptools import setup
+
 import s_tui.helper_functions as AUX
 
 setup(

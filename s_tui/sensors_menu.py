@@ -20,11 +20,12 @@
 A class displaying all available sensors
 """
 
-from __future__ import print_function
-from __future__ import absolute_import
+from __future__ import absolute_import, print_function
+
 import copy
 
 import urwid
+
 from s_tui.sturwid.ui_elements import ViListBox
 
 
@@ -72,7 +73,7 @@ class SensorsMenu:
 
             # create the checkbox buttons with the saved visibility
             for sensor, s_tatus in zip(
-                source.get_sensor_list(), self.sensor_status_dict[source_name]
+                source.get_sensor_list(), self.sensor_status_dict[source_name], strict=False
             ):
                 cb = urwid.CheckBox(sensor, s_tatus)
                 self.sensor_button_dict[source_name].append(cb)
@@ -103,7 +104,7 @@ class SensorsMenu:
     def set_checkbox_value(self):
         for sensor, sensor_cb in self.sensor_button_dict.items():
             sensor_cb_next_state = self.active_sensors[sensor]
-            for checkbox, state in zip(sensor_cb, sensor_cb_next_state):
+            for checkbox, state in zip(sensor_cb, sensor_cb_next_state, strict=False):
                 checkbox.set_state(state)
 
     def on_cancel(self, w):

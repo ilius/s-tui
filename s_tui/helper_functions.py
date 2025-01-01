@@ -18,16 +18,15 @@
 """ Helper functions module with common useful functions """
 
 
-import os
-import logging
-import platform
-import subprocess
-import re
 import csv
-import sys
 import json
+import logging
+import os
+import platform
+import re
+import subprocess
+import sys
 import time
-
 from collections import OrderedDict
 
 __version__ = "1.1.6"

@@ -23,16 +23,15 @@
 from __future__ import absolute_import
 
 import argparse
-import signal
 import itertools
 import logging
 import os
+import signal
 import subprocess
+import sys
 import time
 import timeit
-from collections import OrderedDict
-from collections import defaultdict
-import sys
+from collections import OrderedDict, defaultdict
 
 import psutil
 import urwid
@@ -45,42 +44,40 @@ except ImportError:
 
 # Menus
 from s_tui.about_menu import AboutMenu
-from s_tui.help_menu import HelpMenu
-from s_tui.help_menu import HELP_MESSAGE
-from s_tui.stress_menu import StressMenu
-from s_tui.sensors_menu import SensorsMenu
+from s_tui.help_menu import HELP_MESSAGE, HelpMenu
 
 # Helpers
-from s_tui.helper_functions import __version__
-from s_tui.helper_functions import get_processor_name
-from s_tui.helper_functions import kill_child_processes
-from s_tui.helper_functions import output_to_csv
-from s_tui.helper_functions import output_to_terminal
-from s_tui.helper_functions import output_to_json
-from s_tui.helper_functions import get_user_config_dir
-from s_tui.helper_functions import get_user_config_file
-from s_tui.helper_functions import make_user_config_dir
-from s_tui.helper_functions import user_config_dir_exists
-from s_tui.helper_functions import user_config_file_exists
-from s_tui.helper_functions import seconds_to_text
-from s_tui.helper_functions import str_to_bool
-from s_tui.helper_functions import which
-
-# Ui Elements
-from s_tui.sturwid.ui_elements import ViListBox
-from s_tui.sturwid.ui_elements import radio_button
-from s_tui.sturwid.ui_elements import button
-from s_tui.sturwid.ui_elements import DEFAULT_PALETTE
-from s_tui.sturwid.bar_graph_vector import BarGraphVector
-from s_tui.sturwid.summary_text_list import SummaryTextList
+from s_tui.helper_functions import (
+    __version__,
+    get_processor_name,
+    get_user_config_dir,
+    get_user_config_file,
+    kill_child_processes,
+    make_user_config_dir,
+    output_to_csv,
+    output_to_json,
+    output_to_terminal,
+    seconds_to_text,
+    str_to_bool,
+    user_config_dir_exists,
+    user_config_file_exists,
+    which,
+)
+from s_tui.sensors_menu import SensorsMenu
+from s_tui.sources.fan_source import FanSource
+from s_tui.sources.freq_source import FreqSource
+from s_tui.sources.rapl_power_source import RaplPowerSource
+from s_tui.sources.script_hook_loader import ScriptHookLoader
+from s_tui.sources.temp_source import TempSource
 
 # Sources
 from s_tui.sources.util_source import UtilSource
-from s_tui.sources.freq_source import FreqSource
-from s_tui.sources.temp_source import TempSource
-from s_tui.sources.rapl_power_source import RaplPowerSource
-from s_tui.sources.fan_source import FanSource
-from s_tui.sources.script_hook_loader import ScriptHookLoader
+from s_tui.stress_menu import StressMenu
+from s_tui.sturwid.bar_graph_vector import BarGraphVector
+from s_tui.sturwid.summary_text_list import SummaryTextList
+
+# Ui Elements
+from s_tui.sturwid.ui_elements import DEFAULT_PALETTE, ViListBox, button, radio_button
 
 UPDATE_INTERVAL = 1
 HOOK_INTERVAL = 30 * 1000
@@ -265,7 +262,6 @@ class GraphView(urwid.WidgetPlaceholder):
                 graph.update()
             except IndexError:
                 logging.debug("Graph update failed")
-                pass
 
         # update graph summery
         for summary in self.visible_summaries.values():
@@ -273,7 +269,6 @@ class GraphView(urwid.WidgetPlaceholder):
                 summary.update()
             except IndexError:
                 logging.debug("Summary update failed")
-                pass
 
         # Only update clock if not is stress mode
         if self.controller.stress_controller.get_current_mode() != "Monitor":

@@ -20,8 +20,9 @@
 """
 
 from __future__ import print_function
-import re
+
 import logging
+import re
 
 import psutil
 import urwid

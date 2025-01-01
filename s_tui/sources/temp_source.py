@@ -19,9 +19,10 @@
 
 from __future__ import absolute_import
 
-import warnings
 import logging
+import warnings
 from collections import OrderedDict
+
 import psutil
 
 from s_tui.sources.source import Source

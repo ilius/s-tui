@@ -136,7 +136,7 @@ class LabeledBarGraphVector(urwid.WidgetPlaceholder):
 
         graph_vector_column_list = []
         for state, graph, sub_title in zip(
-            visible_graph_list, self.bar_graph_vector, self.sub_title_list
+            visible_graph_list, self.bar_graph_vector, self.sub_title_list, strict=False
         ):
             if state:
                 text_w = urwid.Text(sub_title, align="center")
@@ -172,7 +172,7 @@ class LabeledBarGraphVector(urwid.WidgetPlaceholder):
 
     @staticmethod
     def check_label(label):
-        if len(label) >= 2 and None not in label or not label or label is None:
+        if (len(label) >= 2 and None not in label) or not label or label is None:
             return True
 
         return False
