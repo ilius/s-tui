@@ -45,7 +45,7 @@ class FanSource(Source):
         self.measurement_unit = "RPM"
         self.pallet = ("fan light", "fan dark", "fan light smooth", "fan dark smooth")
 
-        sensors_dict = dict()
+        sensors_dict = {}
         try:
             sensors_dict = psutil.sensors_fans()
         except IOError:

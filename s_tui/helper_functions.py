@@ -96,7 +96,7 @@ def output_to_csv(sources, csv_writeable_file):
         csv_dict.update({"Time": time.strftime("%Y-%m-%d_%H:%M:%S")})
         summaries = [val for key, val in sources.items()]
         for summarie in summaries:
-            update_dict = dict()
+            update_dict = {}
             for prob, val in summarie.source.get_sensors_summary().items():
                 prob = summarie.source.get_source_name() + ":" + prob
                 update_dict[prob] = val

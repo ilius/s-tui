@@ -46,13 +46,13 @@ RaplStats = namedtuple("rapl", ["label", "current", "max"])
 class RaplReader:
     def __init__(self):
         basenames = glob.glob("/sys/class/powercap/intel-rapl:*/")
-        self.basenames = sorted(set({x for x in basenames}))
+        self.basenames = sorted(set(basenames))
 
     def read_power(self):
         """Read power stats and return dictionary"""
 
         pjoin = os.path.join
-        ret = list()
+        ret = []
         for path in self.basenames:
             name = None
             try:

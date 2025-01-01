@@ -108,13 +108,13 @@ class MainLoop(urwid.MainLoop):
     def signal_handler(self, frame):
         """signal handler for properly exiting Ctrl+C"""
         graph_controller.stress_controller.kill_stress_process()
-        raise urwid.ExitMainLoop()
+        raise urwid.ExitMainLoop
 
     def unhandled_input(self, uinput):
         logging.debug("Caught %s", uinput)
         if uinput == "q":
             graph_controller.stress_controller.kill_stress_process()
-            raise urwid.ExitMainLoop()
+            raise urwid.ExitMainLoop
 
         if uinput == "f1":
             graph_controller.view.on_help_menu_open(graph_controller.view.main_window_w)
@@ -428,7 +428,7 @@ class GraphView(urwid.WidgetPlaceholder):
         self.mode_buttons[0].set_state(True, do_callback=False)
 
         # Create list of buttons
-        control_options = list()
+        control_options = []
         control_options.append(button("Graphs", self.on_graphs_menu_open))
         control_options.append(button("Summaries", self.on_summary_menu_open))
         if self.controller.stress_exe:
@@ -551,7 +551,7 @@ class GraphView(urwid.WidgetPlaceholder):
         )
 
         # Do not show the graph if there is no selected sensors
-        for key in self.graphs.keys():
+        for key in self.graphs:
             if not any(self.graphs_menu.active_sensors[key]):
                 del self.visible_graphs[key]
 
@@ -849,7 +849,7 @@ class GraphController:
                 logging.debug("Saving settings for %s", source)
                 logging.debug("Visible sensors %s", visible_sensors)
                 # TODO: consider changing sensors_list to dict
-                curr_sensor = [x for x in sources if x.get_source_name() == source][0]
+                curr_sensor = next(x for x in sources if x.get_source_name() == source)
                 sensor_list = curr_sensor.get_sensor_list()
                 for sensor_id, sensor in enumerate(sensor_list):
                     try:
@@ -879,7 +879,7 @@ class GraphController:
     def exit_program(self):
         """Kill all stress operations upon exit"""
         self.stress_controller.kill_stress_process()
-        raise urwid.ExitMainLoop()
+        raise urwid.ExitMainLoop
 
     def animate_graph(self, loop, user_data=None):
         """

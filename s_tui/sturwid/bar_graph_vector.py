@@ -116,10 +116,7 @@ class BarGraphVector(LabeledBarGraphVector):
 
     def get_label_scale(self, min_val, max_val, size):
         """Dynamically change the scale of the graph (y label)"""
-        if size < self.SCALE_DENSITY:
-            label_cnt = 1
-        else:
-            label_cnt = int(size / self.SCALE_DENSITY)
+        label_cnt = 1 if size < self.SCALE_DENSITY else int(size / self.SCALE_DENSITY)
         try:
             if max_val >= 100:
                 label = [

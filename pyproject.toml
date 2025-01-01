@@ -36,7 +36,7 @@ select = [
 	"F",   # Pyflakes
 	"E",   # pycodestyle Error
 	"W",   # pycodestyle Warning
-	"C90", # mccabe: C901: {name} is too complex ({complexity})
+	# "C90", # mccabe: C901: {name} is too complex ({complexity})
 	"I",   # isort: unsorted-imports, missing-required-import
 	# "D",   # pydocstyle
 	"B",   # flake8-bugbear
@@ -64,7 +64,7 @@ select = [
 	"PT",   # flake8-pytest-style
 	"Q",    # flake8-quotes
 	"RSE",  # flake8-raise
-	"RET",  # flake8-return
+	# "RET",  # flake8-return
 	"SLF",  # flake8-self
 	"SLOT", # flake8-slots
 	"SIM",  # flake8-simplify
