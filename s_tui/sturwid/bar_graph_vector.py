@@ -144,7 +144,7 @@ class BarGraphVector(LabeledBarGraphVector):
                 ["bg background", self.color_a, self.color_b], satt=self.satt
             )
 
-	# PLR0912 Too many branches (20 > 12)
+    # PLR0912 Too many branches (20 > 12)
     def update(self):  # noqa: PLR0912
         if not self.get_is_available():
             return

@@ -604,7 +604,7 @@ class GraphController:
     visa versa
     """
 
-	# PLR0912 Too many branches (17 > 12)
+    # PLR0912 Too many branches (17 > 12)
     def _load_config(self, t_thresh):  # noqa: PLR0912
         """
         Uses configurations defined by user to configure sources for display.
