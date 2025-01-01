@@ -950,7 +950,7 @@ def main():
         elif args.json:
             output_to_json(sources)
 
-    global graph_controller
+    global graph_controller  # noqa: PLW0603
     graph_controller = GraphController(args)
     graph_controller.main()
 
