@@ -1025,8 +1025,7 @@ def get_args():
         default="2.0",
         help="Refresh rate in seconds. Default: 2.0",
     )
-    args = parser.parse_args()
-    return args
+    return parser.parse_args()
 
 
 if __name__ == "__main__":
