@@ -51,7 +51,7 @@ def get_processor_name():
             all_info = cpuinfo.readlines()
             for line in all_info:
                 if b"model name" in line:
-                    return re.sub(b".*model name.*:", b"", line, count=1)
+                    return re.sub(rb".*model name.*:", b"", line, count=1)
     elif platform.system() == "FreeBSD":
         cmd = ["sysctl", "-n", "hw.model"]
         process = subprocess.Popen(
@@ -89,7 +89,7 @@ def output_to_csv(sources, csv_writeable_file):
     """Print statistics to csv file"""
     file_exists = os.path.isfile(csv_writeable_file)
 
-    with open(csv_writeable_file, "a") as csvfile:
+    with open(csv_writeable_file, "a", encoding="utf-8") as csvfile:
         csv_dict = OrderedDict()
         csv_dict.update({"Time": time.strftime("%Y-%m-%d_%H:%M:%S")})
         summaries = [val for key, val in sources.items()]

@@ -86,6 +86,8 @@ select = [
 	"RUF",  # Ruff-specific rules
 ]
 ignore = [
+	"PLR6301", # Method `...` could be a function, class method, or static method
+	"LOG015",  # `debug()` call on root logger
 	"COM812",  # Trailing comma missing
 	"SLF",     # Private member accessed
 	"DTZ005",  # The use of `datetime.datetime.now()` without `tz` argument is not allowed

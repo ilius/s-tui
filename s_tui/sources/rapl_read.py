@@ -214,7 +214,7 @@ class AMDRaplMsrReader:
 
         # Check whether MSRs are available and we have permission to read them
         try:
-            open("/dev/cpu/0/msr")
+            open("/dev/cpu/0/msr", encoding="utf-8")
             return True
         except (FileNotFoundError, PermissionError):
             return False

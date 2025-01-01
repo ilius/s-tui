@@ -173,7 +173,7 @@ class StressController:
 
     def start_stress(self, stress_cmd):
         """Starts a new stress process with a given cmd"""
-        with open(os.devnull, "w") as dev_null:
+        with open(os.devnull, "w", encoding="utf-8") as dev_null:
             try:
                 stress_proc = subprocess.Popen(
                     stress_cmd, stdout=dev_null, stderr=dev_null
@@ -429,15 +429,19 @@ class GraphView(urwid.WidgetPlaceholder):
 
         # Create list of buttons
         control_options = []
-        control_options.append(button("Graphs", self.on_graphs_menu_open))
-        control_options.append(button("Summaries", self.on_summary_menu_open))
+        control_options.extend((
+            button("Graphs", self.on_graphs_menu_open),
+            button("Summaries", self.on_summary_menu_open),
+        ))
         if self.controller.stress_exe:
             control_options.append(button("Stress Options", self.on_stress_menu_open))
-        control_options.append(button("Reset", self.on_reset_button))
-        control_options.append(button("Help", self.on_help_menu_open))
-        control_options.append(button("About", self.on_about_menu_open))
-        control_options.append(button("Save Settings", self.on_save_settings))
-        control_options.append(button("Quit", self.on_exit_program))
+        control_options.extend((
+            button("Reset", self.on_reset_button),
+            button("Help", self.on_help_menu_open),
+            button("About", self.on_about_menu_open),
+            button("Save Settings", self.on_save_settings),
+            button("Quit", self.on_exit_program),
+        ))
 
         # Create the menu
         animate_controls = urwid.GridFlow(control_options, 18, 2, 0, "center")
@@ -863,7 +867,7 @@ class GraphController:
 
         conf = configparser.ConfigParser()
         config_file = get_user_config_file()
-        with open(config_file, "w") as cfgfile:
+        with open(config_file, "w", encoding="utf-8") as cfgfile:
             conf.add_section("GraphControl")
             # Save the configured refresh rete
             conf.set("GraphControl", "refresh", str(self.refresh_rate))

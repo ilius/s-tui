@@ -143,8 +143,10 @@ class LabeledBarGraphVector(urwid.WidgetPlaceholder):
                 sub_title_widget = urwid.ListBox([text_w])
                 graph_a = [("fixed", 1, sub_title_widget), ("weight", 1, graph)]
                 graph_and_title = urwid.Pile(graph_a)
-                graph_vector_column_list.append(("weight", 1, graph_and_title))
-                graph_vector_column_list.append(("fixed", 1, vline))
+                graph_vector_column_list.extend((
+                    ("weight", 1, graph_and_title),
+                    ("fixed", 1, vline),
+                ))
 
         # if all sub graph are disabled
         if not graph_vector_column_list:
