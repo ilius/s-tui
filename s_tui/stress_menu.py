@@ -214,7 +214,7 @@ class StressMenu:
 
     @staticmethod
     def get_pos_num(num, default):
-        num_valid = re.match(r"\A([0-9]+)\Z", num, re.I)
+        num_valid = re.match(r"\A([0-9]+)\Z", num, re.IGNORECASE)
         if num_valid or (num == "none" and default == "none"):
             return num
         return default
@@ -223,7 +223,7 @@ class StressMenu:
     def get_valid_byte(num, default):
         """check if the format of number is (num)(G|m|B) i.e 500GB, 200mb. 400
         etc.."""
-        num_valid = re.match(r"\A([0-9]+)(M|G|m|g|)(B|b|\b)\Z", num, re.I)
+        num_valid = re.match(r"\A([0-9]+)(M|G|m|g|)(B|b|\b)\Z", num, re.IGNORECASE)
         if num_valid:
             return num
         return default
