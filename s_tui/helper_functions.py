@@ -51,7 +51,7 @@ def get_processor_name():
             all_info = cpuinfo.readlines()
             for line in all_info:
                 if b"model name" in line:
-                    return re.sub(b".*model name.*:", b"", line, 1)
+                    return re.sub(b".*model name.*:", b"", line, count=1)
     elif platform.system() == "FreeBSD":
         cmd = ["sysctl", "-n", "hw.model"]
         process = subprocess.Popen(
@@ -97,8 +97,8 @@ def output_to_csv(sources, csv_writeable_file):
         summaries = [val for key, val in sources.items()]
         for summarie in summaries:
             update_dict = {}
-            for prob, val in summarie.source.get_sensors_summary().items():
-                prob = summarie.source.get_source_name() + ":" + prob
+            for prob_, val in summarie.source.get_sensors_summary().items():
+                prob = summarie.source.get_source_name() + ":" + prob_
                 update_dict[prob] = val
             csv_dict.update(update_dict)
 

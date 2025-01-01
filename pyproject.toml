@@ -41,7 +41,7 @@ select = [
 	# "D",   # pydocstyle
 	"B",   # flake8-bugbear
 	# "UP",  # pyupgrade
-	"YTT", # flake8-2020
+	# "YTT", # flake8-2020
 	"ASYNC1", # flake8-trio
 	"BLE", # flake8-blind-except
 	"B", # flake8-bugbear
@@ -60,7 +60,7 @@ select = [
 	"INP",  # flake8-no-pep420
 	"PIE",  # flake8-pie
 	# "T20",  # flake8-print
-	"PYI",  # flake8-pyi
+	# "PYI",  # flake8-pyi
 	"PT",   # flake8-pytest-style
 	"Q",    # flake8-quotes
 	"RSE",  # flake8-raise
@@ -86,6 +86,7 @@ select = [
 	"RUF",  # Ruff-specific rules
 ]
 ignore = [
+	"PLR0913", # Too many arguments in function definition
 	"ANN401",  # Dynamically typed expressions (typing.Any) are disallowed in ...
 	"ANN003",  # Missing type annotation for `**kwargs`, 22 remaining
 

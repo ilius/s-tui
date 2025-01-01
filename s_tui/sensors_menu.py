@@ -73,7 +73,9 @@ class SensorsMenu:
 
             # create the checkbox buttons with the saved visibility
             for sensor, s_tatus in zip(
-                source.get_sensor_list(), self.sensor_status_dict[source_name], strict=False
+                source.get_sensor_list(),
+                self.sensor_status_dict[source_name],
+                strict=False,
             ):
                 cb = urwid.CheckBox(sensor, s_tatus)
                 self.sensor_button_dict[source_name].append(cb)
@@ -93,7 +95,7 @@ class SensorsMenu:
         self.main_window = urwid.LineBox(ViListBox(listw))
 
         max_height = 6
-        for sensor, s_tatus in self.active_sensors.items():
+        for s_tatus in self.active_sensors.values():
             max_height = max(max_height, len(s_tatus) + 6)
 
         self.size = max_height, self.MAX_TITLE_LEN

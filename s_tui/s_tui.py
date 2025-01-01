@@ -604,7 +604,8 @@ class GraphController:
     visa versa
     """
 
-    def _load_config(self, t_thresh):
+	# PLR0912 Too many branches (17 > 12)
+    def _load_config(self, t_thresh):  # noqa: PLR0912
         """
         Uses configurations defined by user to configure sources for display.
         This should be the only place where sources are initiated
@@ -799,7 +800,7 @@ class GraphController:
             # In case of Zero division, we want an error to return, and
             # get a clue where this happens
             logging.debug("Some stat caused divide by zero exception. Exiting")
-            logging.error(err, exc_info=True)
+            logging.exception(err)
             print(ERROR_MESSAGE)
         except AttributeError as err:
             # In this case we restart the loop, to address bug #50, where
@@ -811,7 +812,7 @@ class GraphController:
             # This might happen if the stress process is not found, in this
             # case, we want to know why
             logging.error("No such process error")
-            logging.error(err, exc_info=True)
+            logging.exception(err)
             print(ERROR_MESSAGE)
 
     def update_stress_mode(self):
